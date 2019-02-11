@@ -1,0 +1,32 @@
+body {
+    background-color: #EEE;
+}
+
+.navbar-custom {
+    background-color: #34495e;
+}
+
+.navbar-custom a {
+    color: #FFF;
+}
+
+.custom-sidebar {
+    border: 1px solid #EAEAEA;
+    padding: 5px;
+    background-color: #FFF;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #34495e;
+}
+
+.nav-pills .nav-link {
+    color: black;
+}
+
+.content-section {
+    border: 1px solid #EAEAEA;
+    background-color: #FFF;
+    padding: .75rem;
+    border-radius: .35rem
+}
