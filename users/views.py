@@ -23,8 +23,9 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
         # Delete Previous Image To Avoid Duplicated Images Of Same User.
-        previous_image = os.path.join(settings.MEDIA_ROOT, request.user.profile.image.name)
-        os.remove(previous_image)
+        if request.POST.get('image') != '':
+            previous_image = os.path.join(settings.MEDIA_ROOT, request.user.profile.image.name)
+            os.remove(previous_image)
         
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -43,7 +44,8 @@ def profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'u': request.user
+        'u': request.user,
+        'title': f'{request.user.username} | Profile'
     }
 
     return render(request, 'users/profile.html', context)

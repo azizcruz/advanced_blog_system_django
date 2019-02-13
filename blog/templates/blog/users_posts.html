@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
+<h1>All Posts By {{ view.kwargs.username }} ({{page_obj.paginator.count}})</h1> 
     {% for post in posts %}
         <div class="card">
             <div class="card-header">
@@ -12,7 +13,7 @@
                         <img src="{{ post.author.profile.image.url }}" alt="profile image" class="rounded-circle img-fluid">
                     </div>
                     <div class="col-9 col-md-10">
-                        <p><small>Written by <a href="{% url 'blog:user_posts_page' post.author.username %}">{{ post.author }}</a>  on {{ post.date_created | date:"F d, Y" }}</small></p>
+                        <p><small>Written by {{ post.author }} on {{ post.date_created | date:"F d, Y" }}</small></p>
                         <p class="card-text">{{ post.content | truncatechars:80 }}</p>
                         <a href="{% url 'blog:detail' post.id %}" class="btn btn-primary">Details</a>
                     </div>

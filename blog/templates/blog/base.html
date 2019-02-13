@@ -20,6 +20,10 @@
                         <div class="alert alert-{{ message.tags }}">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
+
+                {% if next %}
+                         <div class="alert alert-danger">Login first</div>
+                {% endif %}
                 {% block content %}{% endblock content %}
             </div>
         </div>
