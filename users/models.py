@@ -6,7 +6,7 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.png', upload_to='profile_images')
+    image = models.ImageField(default='profile_images/default.png', upload_to='profile_images')
     bio = models.TextField()
 
     def __str__(self):
@@ -15,15 +15,20 @@ class Profile(models.Model):
     # Resizing big images dimensions.
     def save(self, *args, **kwargs):
         '''Overriding Save Method To Resize Image After Creating A Profile'''
-        # EXECUTE THE ORIGINAL SAVE METHOD FIRST.
-        super().save(*args, **kwargs)
+        try:
+            # EXECUTE THE ORIGINAL SAVE METHOD FIRST.
+            super().save(*args, **kwargs)
 
-        # GET THE IMAGE.
-        img = Image.open(self.image.path)
+            # GET THE IMAGE.
+            img = Image.open(self.image.path)
 
-        if img.height > 300 and img.width > 300:
-            # NEW SIZE.
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+            if img.height > 300 and img.width > 300:
+                # NEW SIZE.
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
+        except:
+            print("Error Occured")
+        
+        
 
